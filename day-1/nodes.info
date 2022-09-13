@@ -1,0 +1,100 @@
+docker is container technology : a tool to create and manage the container
+
+container is running instace of images
+
+// downlaod the images 
+docker run node [create new container evary time]
+    -it > interactive terminal
+    -d > de-attached mode
+
+// show imges
+docker images
+
+docker attach [containerId][container_name]
+
+// container
+    // ps > process 
+docker ps 
+    // -a show all container
+
+
+--------------------------------------------------------------------------------------
+docker file
+--------------------------------------------------------------------------------------
+# image buidling 
+
+# pull the node image
+FROM node
+
+WORKDIR /app
+
+# source . same folder
+# destination . path inside of image | image container contain own file system
+#   don't use main root folder 
+#   /app > create app folder (if not exists)
+
+# it is create the copy of file into the images it self
+COPY . /app
+
+# by default docker run all command on root directory 
+# use WORKDIR /app the copy with relative path ./
+#                            or absolute path  /app
+RUN npm install
+
+# docker application isolated in it's env
+# so we have to expose the port to outside word
+EXPOSE 80
+
+# RUN command run when image is created
+# CMD command run when container is started based on images
+CMD ["node","server.js"]
+
+# docker build [path] to build the image specify on dockerfile
+
+# docker run [containerId] [container_name]
+#   external port:internal port
+#   -p 3000:3000 
+
+# docker stop [containerId] [container_name]
+
+# ---------------------------------------------------------------------
+
+# images are layer based (use cached memery)    
+#  when one layer changed all the sub-suquence layer all buid newly
+
+# COPY package.json /app // optimized
+# RUN npm install
+# COPY . /app
+
+# ----------------------------------------------------------------------
+
+
+docker ps 
+docker ps -a
+
+docker start [containerId][container_name]  \\  docker on de-attached mode
+docker run [containerId][container_name]    \\  docker on attached mode >>> listing for output
+
+docker run -p .. -d [containerId][container_name] -d de-attached mode
+
+docker logs    [containerId][container_name]
+docker logs -f [containerId][container_name] \\ run attach mode with previos log and furture as well
+
+docker start -a -i [containerId][container_name] // attached and interactive mode 
+
+# -------------------------------------------------------------------
+deleting the image and container
+# -------------------------------------------------------------------
+
+you cannot remove runnig container
+
+docker rm [] [] [] [] [containerId] [container_name]
+
+stop container > remove container > delete image
+docker rmi [] [] 
+
+[automatically]  --rm
+
+
+
+
