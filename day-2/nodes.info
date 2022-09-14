@@ -1,0 +1,38 @@
+// see image configuration
+docker image inspect [imageId]
+
+// copy file from local to docker \ docker to local
+//  uses : logs copy
+docker cp [location] [containerId]:[location]
+docker cp [containerId]:[location] [location]
+
+
+// naming and tagging container and images
+// container
+docker run -p 3000:80 -d --rm --name [containerName] [containerId] [imageName]:[imageTag]
+
+// images >>   name:tag
+docker build -t [imageName]:[imageTag] .
+
+// remove all image (including taged onez)
+docker image prune -a
+
+
+sharing container
+// share Dockerfile
+// share image directly
+
+
+// pushing image to dockerhub ( PRIVATE : HOST:NAME)
+docker pull IMAGE_NAME
+docker push IMAGE_NAME
+
+docker push username/image-name ( always pull latest image)
+
+docker tag [old-name]:[tag] [new-name]:[tag]
+
+docker login 
+docker logout
+
+// open docker directory
+docker exec -it [container_name][containerId] bash
