@@ -1,0 +1,44 @@
+volumes are folder in host machine : which mounted into container
+
+volume type 
+ managed by docker
+    // named 
+        volume is preserved  when container stoped
+    // anonymus
+        volume is not preserved  when container stoped
+        use to locking the data 
+        docker run 
+            --rm 
+            -d 
+            --name [container_name] 
+            -p [exposing_port]:[internal_port] 
+            -v [name_volume]:[location_to_preserve_in_docker] 
+            [imagedName]:[imageTag]
+ managed by user
+    // bind mount
+    docker run 
+        --rm 
+        -d 
+        --name [container_name] 
+        -p [exposing_port]:[internal_port] 
+        -v [name_volume]:[location_to_preserve_in_docker]
+        -v "[location_to_preserve_in_local]:[location_to_preserve_in_docker]:ro" // read only (prevent accident write)
+        -v /app/node_modules // preserve the binded data
+        -v /app/temp
+        [imagedName]:[imageTag]
+
+    [[[in docker internal volume win]]]
+
+    Just a quick note: If you don't always want to copy 
+    and use the full path, you can use these shortcuts:
+    macOS / Linux: -v $(pwd):/app
+    Windows: -v "%cd%":/app
+
+
+
+// remove volume
+docker volume rm [name_volume]
+
+// remove all volume
+docker volume prune
+
