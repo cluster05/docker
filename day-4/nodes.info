@@ -1,0 +1,36 @@
+// Docker Newtworks
+
+//  Request from container to WWW
+//  Request from container to host machine
+//  Request from container to other container
+
+
+//  Request from container to WWW               
+    default works
+
+//  Request from container to host machine
+    mongodb://localhost:27017/dbname
+    localhost > host.docker.internal
+
+//  Request from container to other container
+    docker run -d --name mongodb mongo
+
+    docker container inspect mongodb
+        NewtworksSetting : {
+            IPAddress : "127.0.0.1" // >> copy paste
+        }    
+    
+
+// Docker Newtworks 
+    docker newtwork create [newtwork_name]
+
+    docker newtwork ls
+
+    docker run -d --name mongodb --newtwork [newtwork_name] mongo
+
+    mongodb://[container_name]:27017/dbname
+
+
+
+
+
