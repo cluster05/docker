@@ -1,0 +1,33 @@
+// restrict the docker COPY file 
+.dockerignore file 
+node_modules
+
+// .env
+docker support
+    run time env
+    build time arg 
+
+80 : http default port
+
+from 
+// Dockerfile
+ENV PORT 80
+EXPOSE $PORT
+
+
+// run time 
+--env/-e PORT 8000 --env SECOND VALUE
+
+// run time .env file 
+--env-file ./.env
+
+
+// build time args
+
+...
+COPY ...
+ARG DEFAULT_PORT=80 
+ENV PORT $DEFAULT_PORT
+...
+
+docker buidler -t [imagedName]:[imageTag] --build-arg DEFAULT_PORT=8000
