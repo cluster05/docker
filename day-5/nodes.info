@@ -1,0 +1,54 @@
+network create doodle 
+
+MongoDB
+// exposing port until we create the network
+docker run -d --name mongodb --rm -p --network doddle mongo
+
+Server
+
+// Dockerfile 
+FROM node
+
+WORKDIR /app
+
+COPY package.json .
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 80
+
+CMD ["node","app.js"]
+
+// .dockerignore
+node_modules
+Dockerfile
+.git
+
+docker build -t backend .
+docker run --name backend-app --rm -d --network doodle -p 8080:80 backend
+
+docker build -t frontend .
+docker run --name fronend-app --rm -d -p 3000:3000  frontend
+
+------------------------------------------------------------------------------------------------------------
+
+data persistance / security 
+docker run --name mongodb -e MONGO_INITDB_ROOT_USERNAME=username -e MONGO_INITDB_ROOT_PASSWORD=password -v data:/data/db --rm -d --network doodle mongo 
+
+// server logs
+
+                                                        // Bind mount
+docker run --name backend-app -v /home/cluster/Code/Docker/docker/day-5/multi-01-starting-setup/backend:/app -v logs:/app/logs --rm -d --network doodle -p 8080:80 backend
+
+nodemon install 
+use node 14 : file change abort opration [error]
+
+
+ENV MONGODB_USERNAME=username MONGODB_PASSWORD=passowrd
+
+
+----------------------------------------------------------------------------------------------------------------------
+
+docker run --name fronend-app -v /home/cluster/Code/Docker/docker/day-5/multi-01-starting-setup/frontend/src:/app/src --rm -d -p 3000:3000  frontend
