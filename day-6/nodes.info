@@ -1,0 +1,13 @@
+docker compose : automating multi-container steps
+
+-d --rm by  // default docker compose 
+
+all service in docker compose create network
+
+docker-compose up 
+docker-compose up -d
+docker-compose up -d --build // force build
+docker-compose down 
+docker-compose down -v
+
+
