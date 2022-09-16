@@ -1,0 +1,7 @@
+docker run -it -d node
+
+docker exec -it [container_name] npm init
+
+-------------------------------------------
+
+doker run node npm init
