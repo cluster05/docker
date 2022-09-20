@@ -1,0 +1,71 @@
+Deployment
+
+Bind mount don't work on production
+containerized application need build step
+multi-contianer project might need to be split accrose multiple machine
+trade off between control and responsibility might be worth
+
+// local
+buid
+run 
+test
+
+//Deployment
+
+1 ) Create EC2
+2 ) Use guide from EC2 to Connect
+3 ) Install docker
+    sudo yum update -y // update packages
+    sudo amazon-linux-extras install docker
+    sudo service docker start
+
+    create new docker repository in docker.hub.com
+
+    .dockerignore
+    node_modules
+    Dockerfile
+    *.pem
+
+    change tag name of image
+    docker tag [old_image] [docker-username]/[docker-repository]
+    docker push [docker-username]/[docker-repository]
+
+    //EC2
+    sudo docker run -d --rm -p 80:80 cluster05/cluster-docker
+
+    securiy group 
+    inbound > ssh 42
+        // add new http
+    outbound > all
+
+-------------------------------------------------------------------------------------
+Changes
+
+rebuild 
+tag it 
+push 
+-----
+stop running container
+pull it 
+run it
+
++-----------------+
+| Dis-advantages  |
++-----------------+
+    Do it yourself approch 
+
+    manage them , update , moniter , scalling
+
+-------------------------------------------------------------------------------------
+
+# AWS ECS ( Elastic container sevice )
+Highly secure, reliable, and scalable way to run containers
+
+Setup //
+
+FARGATE >> runtime >> runnig when only it is running
+delete container
+delete cluster
+
+
+
